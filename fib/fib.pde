@@ -1,10 +1,19 @@
+import gifAnimation.*; 
+
+GifMaker gifExport;
+int frames = 0;
+int totalFrames = 1000;
+
+
 int[] fib = new int[20]; 
 int r=0; 
 int g=0; 
 int b=0; 
 
 void setup() {
-  size(1600, 1000); 
+  gifExport = new GifMaker(this, "export.gif", 100);
+  gifExport.setRepeat(0); // make it an "endless" animation
+  size(300, 300); 
   stroke(255-r, 255-g, 255-b); 
   frameRate(25);
   fib[0] = 1; 
@@ -51,6 +60,7 @@ void draw() {
     
     setup(); 
   }
+  export(); 
 }
 void mousePressed(){
   r=(int)random(0,255); 
@@ -59,4 +69,17 @@ void mousePressed(){
   
   stroke(255-r, 255-g, 255-b); 
   background(r,g,b);
+}
+
+void export() {
+  if(frames < totalFrames) {
+    gifExport.setDelay(50);
+    gifExport.addFrame();
+    frames++;
+  } else {
+    gifExport.finish();
+    frames++;
+    println("gif saved");
+    exit();
+  }
 }

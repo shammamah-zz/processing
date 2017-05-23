@@ -1,3 +1,9 @@
+import gifAnimation.*; 
+
+GifMaker gifExport;
+int frames = 0;
+int totalFrames = 300;
+
 int lightr = int(random(0,255)); 
 int lightg = int(random(0,255)); 
 int lightb = int(random(0,255)); 
@@ -7,6 +13,9 @@ void setup(){
   surface.setResizable(true); 
   background((255-lightr)/10, (255-lightg)/10, (255-lightb)/10); 
   //dark background, but inverse of light colour
+  gifExport = new GifMaker(this, "export.gif", 100);
+  gifExport.setRepeat(0); // make it an "endless" animation
+ 
 }
 
 void draw(){
